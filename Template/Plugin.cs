@@ -1,42 +1,40 @@
-﻿using BepInEx;
+﻿using System;
+using System.IO;
+using BepInEx;
+using BepInEx.Bootstrap;
+using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
-using YourThunderstoreTeam.patch;
-using YourThunderstoreTeam.service;
+using UnityEngine;
 
-namespace YourThunderstoreTeam;
-
-[BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
-public class Plugin : BaseUnityPlugin
+namespace AdvanceFeatures
 {
-    public static Plugin Instance { get; set; }
-
-    public static ManualLogSource Log => Instance.Logger;
-
-    private readonly Harmony _harmony = new(PluginInfo.PLUGIN_GUID);
-
-    public TemplateService Service;
-
-    public Plugin()
+    [BepInPlugin("com.example.yourmod", "yourmod", "1.0.0")]
+    public class Plugin : BaseUnityPlugin
     {
-        Instance = this;
-    }
 
-    private void Awake()
-    {
-        Service = new TemplateService();
+        public static ConfigEntry<bool> EnableDebug;
+        internal static ManualLogSource Log;
+        private Harmony _harmony;
+        private AssetBundle _assetBundle;
 
-        Log.LogInfo($"Applying patches...");
-        ApplyPluginPatch();
-        Log.LogInfo($"Patches applied");
-    }
+        private void Awake()
+        {
+            Log = Logger;
+            Log.LogInfo("Initializing Advance Features plugin");
 
-    /// <summary>
-    /// Applies the patch to the game.
-    /// </summary>
-    private void ApplyPluginPatch()
-    {
-        _harmony.PatchAll(typeof(ShipLightsPatch));
-        _harmony.PatchAll(typeof(PlayerControllerBPatch));
+            EnableDebug = Config.Bind(
+                "General",
+                "EnableDebug",
+                true,
+                "Toggle the debug stuff"
+            );
+
+            _harmony = new Harmony("com.example.advancefeatures");
+            _harmony.PatchAll();
+            Log.LogInfo("Harmony patches applied");
+
+            string bundlePath = Path.Combine(Path.GetDirectoryName(Info.Location)!, "assetbundle");
+        }
     }
 }
