@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<AssemblyName>AdvanceFeatures</AssemblyName>
+		<AssemblyName>YourModName</AssemblyName>
 		<GenerateAssemblyInfo>False</GenerateAssemblyInfo>
 		<TargetFramework>netstandard2.1</TargetFramework>
 	</PropertyGroup>
