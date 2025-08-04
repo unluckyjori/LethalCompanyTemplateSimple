@@ -7,9 +7,9 @@ using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
 
-namespace AdvanceFeatures
+namespace YourModName
 {
-    [BepInPlugin("com.example.yourmod", "yourmod", "1.0.0")]
+    [BepInPlugin("com.example.yourmodname", "Your Mod Name", "1.0.0")]
     public class Plugin : BaseUnityPlugin
     {
 
@@ -21,7 +21,7 @@ namespace AdvanceFeatures
         private void Awake()
         {
             Log = Logger;
-            Log.LogInfo("Initializing Advance Features plugin");
+            Log.LogInfo("Initializing Your Mod Name plugin");
 
             EnableDebug = Config.Bind(
                 "General",
@@ -30,7 +30,7 @@ namespace AdvanceFeatures
                 "Toggle the debug stuff"
             );
 
-            _harmony = new Harmony("com.example.advancefeatures");
+            _harmony = new Harmony("com.example.yourmodname");
             _harmony.PatchAll();
             Log.LogInfo("Harmony patches applied");
 
