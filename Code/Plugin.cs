@@ -12,7 +12,6 @@ namespace YourModName
     [BepInPlugin("com.example.yourmodname", "Your Mod Name", "1.0.0")]
     public class Plugin : BaseUnityPlugin
     {
-
         public static ConfigEntry<bool> EnableDebug;
         internal static ManualLogSource Log;
         private Harmony _harmony;
@@ -26,7 +25,7 @@ namespace YourModName
             EnableDebug = Config.Bind(
                 "General",
                 "EnableDebug",
-                true,
+                false,
                 "Toggle the debug stuff"
             );
 
@@ -34,7 +33,8 @@ namespace YourModName
             _harmony.PatchAll();
             Log.LogInfo("Harmony patches applied");
 
-            string bundlePath = Path.Combine(Path.GetDirectoryName(Info.Location)!, "assetbundle");
+// Asset bundle optional
+// string bundlePath = Path.Combine(Path.GetDirectoryName(Info.Location)!, "assetbundle");
         }
     }
 }

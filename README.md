@@ -25,14 +25,8 @@ This project is a simple template for creating mods for the game Lethal Company.
    ```
 5. Place the compiled DLL in the BepInEx plugins folder.
 
-## Contributing
-Feel free to submit issues or pull requests. For major changes, please open an issue first to discuss what you would like to change.
-
 ## License
 This project is licensed under the MIT License.
-
-## Changelog
-See [CHANGELOG.md](CHANGELOG.md) for version history and updates.
 
 ---
 
